@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treino de Tabuadas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="cabecalho">
+    <h1>Treino de Tabuadas</h1>
+    <p class="subtitulo">Pratique multiplicação de um jeito leve e divertido</p>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== CARTÃO DE IDENTIFICAÇÃO ===== -->
+    <section class="cartao">
+      <label for="nomeAluna" class="rotulo">Nome da aluna</label>
+      <input type="text" id="nomeAluna" class="campo-texto"
+             placeholder="Digite seu nome" autocomplete="off">
+      <p class="dica">Seu desempenho fica salvo neste computador.</p>
+    </section>
+
+    <!-- ===== SELEÇÃO DE TABUADA ===== -->
+    <section class="cartao">
+      <h2 class="titulo-secao">Escolha a tabuada</h2>
+      <div class="grade-tabuadas" id="gradeTabuadas" role="group"
+           aria-label="Seleção de tabuada"></div>
+    </section>
+
+    <!-- ===== SELEÇÃO DE MODO ===== -->
+    <section class="cartao">
+      <h2 class="titulo-secao">Escolha o modo</h2>
+      <div class="grade-modos" id="gradeModos" role="group"
+           aria-label="Seleção de modo de jogo">
+        <button class="botao-modo ativo" data-modo="livre">Livre</button>
+        <button class="botao-modo" data-modo="desafio">Desafio 10</button>
+        <button class="botao-modo" data-modo="cronometro">Cronometrado</button>
+      </div>
+    </section>
+
+    <!-- ===== ÁREA DO JOGO ===== -->
+    <section class="cartao cartao-jogo">
+      <div class="barra-info">
+        <span id="infoProgresso">Modo livre</span>
+        <span id="infoTempo" class="oculto">60s</span>
+      </div>
+
+      <div class="barra-progresso" id="barraProgresso" aria-hidden="true">
+        <div class="barra-preenchida" id="barraPreenchida"></div>
+      </div>
+
+      <p class="conta" id="conta">7 × 8 = ?</p>
+
+      <div class="area-resposta">
+        <label for="resposta" class="oculto">Sua resposta</label>
+        <input type="number" id="resposta" class="campo-resposta"
+               inputmode="numeric" placeholder="?" autocomplete="off">
+        <button id="btnConfirmar" class="botao botao-principal">Confirmar</button>
+      </div>
+
+      <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+
+      <div class="acoes">
+        <button id="btnNova" class="botao botao-secundario">Nova questão</button>
+        <button id="btnReiniciar" class="botao botao-secundario">Reiniciar treino</button>
+      </div>
+    </section>
+
+    <!-- ===== PLACAR ===== -->
+    <section class="cartao placar">
+      <div class="item-placar">
+        <span class="valor" id="placarAcertos">0</span>
+        <span class="legenda">Acertos</span>
+      </div>
+      <div class="item-placar">
+        <span class="valor" id="placarTentativas">0</span>
+        <span class="legenda">Tentativas</span>
+      </div>
+      <div class="item-placar">
+        <span class="valor" id="placarPercentual">0%</span>
+        <span class="legenda">Aproveitamento</span>
+      </div>
+    </section>
+
+    <!-- ===== TELA DE RESULTADO ===== -->
+    <section class="cartao cartao-resultado oculto" id="telaResultado">
+      <h2 class="titulo-secao" id="tituloResultado">Resultado</h2>
+      <p class="mensagem-resultado" id="mensagemResultado"></p>
+      <div class="placar">
+        <div class="item-placar">
+          <span class="valor" id="resAcertos">0</span>
+          <span class="legenda">Acertos</span>
+        </div>
+        <div class="item-placar">
+          <span class="valor" id="resErros">0</span>
+          <span class="legenda">Erros</span>
+        </div>
+        <div class="item-placar">
+          <span class="valor" id="resPercentual">0%</span>
+          <span class="legenda">Aproveitamento</span>
+        </div>
+      </div>
+      <div class="acoes">
+        <button id="btnJogarNovamente" class="botao botao-principal">Jogar de novo</button>
+        <button id="btnTrocarTabuada" class="botao botao-secundario">Trocar tabuada</button>
+      </div>
+    </section>
+
+    <!-- ===== PAINEL DE DESEMPENHO ===== -->
+    <section class="cartao">
+      <h2 class="titulo-secao">Desempenho</h2>
+      <div class="resumo-desempenho">
+        <div class="item-placar">
+          <span class="valor" id="totalSessoes">0</span>
+          <span class="legenda">Sessões</span>
+        </div>
+        <div class="item-placar">
+          <span class="valor" id="mediaGeral">0%</span>
+          <span class="legenda">Média</span>
+        </div>
+        <div class="item-placar">
+          <span class="valor" id="melhorGeral">0%</span>
+          <span class="legenda">Melhor</span>
+        </div>
+      </div>
+
+      <div class="lista-historico" id="listaHistorico"></div>
+
+      <div class="acoes">
+        <button id="btnExportarAluna" class="botao botao-secundario">Exportar esta aluna</button>
+        <button id="btnExportarTurma" class="botao botao-secundario">Exportar toda a turma</button>
+        <button id="btnLimparHistorico" class="botao botao-perigo">Limpar histórico desta aluna</button>
+      </div>
+    </section>
+
+    <!-- ===== RANKING DA TURMA ===== -->
+    <section class="cartao">
+      <h2 class="titulo-secao">Ranking da turma</h2>
+      <div class="lista-ranking" id="listaRanking"></div>
+      <div class="acoes">
+        <button id="btnAtualizarRanking" class="botao botao-secundario">Atualizar ranking</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>Feito para as alunas do magistério — pratique um pouco todos os dias.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
